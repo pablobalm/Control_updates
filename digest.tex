@@ -74,7 +74,7 @@
 
 \title{Control Theory: Weekly Scan for Novel Work}
 \author{Automated weekly scan}
-\date{Last updated: none yet} % LAST-UPDATED (each weekly run rewrites this line)
+\date{Last updated: 27 October 2026} % LAST-UPDATED (each weekly run rewrites this line)
 
 \begin{document}
 \maketitle
@@ -82,9 +82,14 @@
 \section*{Acronyms}
 % Alphabetical. Each weekly run adds any new acronym it uses, never a duplicate.
 \begin{acronym}[MPC]
+  \acro{HJB}{Hamilton--Jacobi--Bellman}
+  \acro{IQC}{integral quadratic constraint}
   \acro{LMI}{linear matrix inequality}
+  \acro{LQ}{linear-quadratic}
+  \acro{LQR}{linear-quadratic regulator}
   \acro{MPC}{model predictive control}
   \acro{RL}{reinforcement learning}
+  \acro{SDP}{semidefinite program}
 \end{acronym}
 
 \section*{Selection bar}
@@ -106,6 +111,63 @@ Mathematics of Operations Research.
 % the marker line and leaves the marker in place.
 % ---------------------------------------------------------------------------
 %%% NEW-WEEK-INSERTION-POINT %%%
+
+\section{Week ending 27 October 2026}
+\label{week:2026-10-27}
+\paragraph{Judgement.} This week's scan did not run as designed: the arXiv API, the arXiv listing pages and Crossref were all unreachable, so no systematic listing and no full text could be read, and no journal articles were covered. What follows rests on about 50 of the window's several hundred eess.SY and math.OC submissions, found by web search and judged from their abstracts, so it is a partial sample rather than a verdict on the week. Within that sample the strongest work is mathematical control theory: an open conjecture on exact controllability of difference delay equations is settled, and two exact (if-and-only-if) characterisations appear, for adaptive stabilizability of Markov jump systems and for observability of coupled parabolic systems from measurable sets.
+
+\subsection*{Preprints (full-text assessment)}
+Full text could not be retrieved this week (see Coverage): every entry below rests on the abstract and on short excerpts of the HTML version exposed by the search index, so no confidence rating exceeds medium.
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Exact controllability and rapid stabilization of linear difference delay equations and one-dimensional hyperbolic systems}~\cite{chitour2026exact} (\href{https://arxiv.org/abs/2610.31225}{arXiv:2610.31225}).\\
+  \emph{Setting:} controlled linear difference delay equations with state space $L^r$, and one-dimensional linear hyperbolic systems that reduce to such equations along characteristics.\\
+  \emph{Main result:} a Hautus-type frequency-domain condition, already known to be sufficient for exact controllability in $L^r$, is proved necessary for every $r \in (1,+\infty)$; the same condition is shown to suffice for rapid stabilization in $L^2$ (closed-loop exponential decay at any prescribed rate); for the hyperbolic systems this gives a necessary and sufficient frequency-domain test for exact controllability in $L^r$, $r \in [1,+\infty)$.\\
+  \emph{Technique:} the delay system is rewritten as an evolution equation on a suitable Banach space so that duality arguments apply; the criterion itself is of Hautus--Yamamoto (realization-theoretic) type.\\
+  \emph{What is new:} Chitour, Fueyo, Mazanti and Sigalotti (2023) proved necessity only in $L^1$ and stated the $L^r$ case as a conjecture, which this paper answers; it also derives rapid stabilization from the same criterion.\\
+  \emph{Limitations:} linear, constant-coefficient systems; the precise hypotheses of the main theorems, and how the stabilizing feedback is constructed, could not be checked.\\
+  \emph{Verdict:} settles a stated open problem and gives a tight characterisation; confidence medium (abstract and indexed excerpts only, full text unreachable).
+  \item \textbf{Necessary and Sufficient Conditions for Adaptive Stabilizability of Continuous-Time Markov Jump Linear Stochastic Systems}~\cite{guo2026necessary} (\href{https://arxiv.org/abs/2610.34197}{arXiv:2610.34197}).\\
+  \emph{Setting:} continuous-time Markov jump linear stochastic systems with known candidate modes but an unobserved Markov parameter process, so any stabilizing law must adapt; further regularity assumptions are not spelled out in the abstract.\\
+  \emph{Main result:} global adaptive stabilizability holds if and only if the coupled Riccati equations that characterise stabilizability with the mode observed are solvable, \ie the weakest possible structural condition is the non-adaptive one.\\
+  \emph{Technique:} not visible from the abstract beyond the coupled Riccati equations through which the condition is stated.\\
+  \emph{What is new:} Fang and Loparo (2002) characterised non-adaptive mean-square stabilizability through coupled Riccati equations, and Xue and Guo (2001) showed that in discrete time adaptive stabilizability requires different coupled Riccati equations; here the two conditions coincide, so in continuous time not observing the mode costs nothing for stabilizability.\\
+  \emph{Limitations:} single-author preprint; the regularity assumptions, and so the source of the gap with discrete time, could not be checked; nothing on transient performance or on how the adaptive law is built.\\
+  \emph{Verdict:} a tight characterisation that also exposes a basic difference between continuous and discrete time; confidence medium (abstract only, full text unreachable).
+  \item \textbf{Observability from measurable sets for strongly coupled parabolic systems}~\cite{chen2026observability} (\href{https://arxiv.org/abs/2610.31876}{arXiv:2610.31876}).\\
+  \emph{Setting:} linear parabolic systems with any number of components, a constant coercive diffusion matrix that need not be diagonalizable, constant coupling and observation matrices, and observation on an arbitrary space-time set of positive measure.\\
+  \emph{Main result:} the system is observable from such a set if and only if a generalized Kalman rank condition holds at every Dirichlet eigenvalue.\\
+  \emph{Technique:} a Remez-type inequality for exponential polynomials, combined with a spectral inequality and the Lebeau--Robbiano strategy.\\
+  \emph{What is new:} Fu, Wang, Yu and Zhu (2026) handled two strongly coupled equations observed through one component; Kalman-type conditions for coupled parabolic systems were known for open control sets (Ammar Khodja, Benabdallah, Dupaix and Gonz{\'a}lez-Burgos, 2009), and measurable-set observability for a single heat equation (Apraiz, Escauriaza, Wang and Zhang, 2014).\\
+  \emph{Limitations:} constant coefficients only, so space- or time-dependent couplings are not covered; whether the observability constant is explicit could not be checked.\\
+  \emph{Verdict:} a tight characterisation that closes the measurable-set case for constant-coefficient coupled systems; confidence medium (abstract only, full text unreachable).
+  \item \textbf{Ergodic Linear-Quadratic Optimal Control with Stochastic Coefficients}~\cite{lin2026ergodic} (\href{https://arxiv.org/abs/2610.30219}{arXiv:2610.30219}).\\
+  \emph{Setting:} long-run average (ergodic) \ac{LQ} control of linear stochastic systems whose coefficients are themselves random processes.\\
+  \emph{Main result:} a stochastic ergodic \ac{HJB} equation in which the ergodic constant becomes a random process $\lambda$; the equation is well posed, and $\lambda$ gives the optimal ergodic cost for a broad class of averaging kernels, including normalized finite-horizon and discounted costs; with random-periodic coefficients a random-periodic solution exists and all admissible kernels give the same optimal cost; the optimal ergodic costs are stable under perturbations of the coefficients.\\
+  \emph{Technique:} not visible from the abstract and the excerpts returned by the search.\\
+  \emph{What is new:} Guatteri and Masiero (2009) treated stationary stochastic coefficients and Wu and Zhang (2026) random-periodic ones, each with a deterministic ergodic constant; letting the ergodic constant itself be a random process is a new formulation, and one equation then covers several averaging criteria at once.\\
+  \emph{Limitations:} \ac{LQ} structure only; the standing assumptions on the coefficients could not be checked; no examples are mentioned.\\
+  \emph{Verdict:} a new problem formulation for ergodic control under random coefficients; confidence medium (abstract only, full text unreachable).
+  \item \textbf{Dual Effect and Certainty Equivalence Revisited for a Linear-Gaussian Dual Control Problem}~\cite{wang2026dual} (\href{https://arxiv.org/abs/2610.30034}{arXiv:2610.30034}).\\
+  \emph{Setting:} a scalar linear-Gaussian dual control problem, with stage costs restricted to those that the certainty-equivalent input minimizes.\\
+  \emph{Main result:} a no-dual-effect notion stated on the Bellman objective rather than on the estimator (``Bellman-side'' no dual effect), under which certainty equivalence is optimal for a Bellman step even when the classical no-dual-effect conditions fail; under mild regularity this property is characterised by a heat equation, which identifies the class of such cost-to-go functions and splits any cost-to-go into a no-dual-effect part and a dual-effect part.\\
+  \emph{Technique:} analysis of a single Bellman recursion, reducing the requirement that the expected cost-to-go not depend on the current input to a heat equation.\\
+  \emph{What is new:} Bar-Shalom and Tse (1974) tied certainty equivalence to the absence of a dual effect, defined through the effect of the control on future estimation uncertainty; this paper moves the notion to the Bellman objective and characterises it exactly.\\
+  \emph{Limitations:} scalar model and a restricted class of stage costs; no multivariable extension; the abstract does not say whether the decomposition helps compute dual controllers.\\
+  \emph{Verdict:} a new system-theoretic concept with a sharp characterisation, on a deliberately simple model; confidence medium (abstract only, full text unreachable).
+\end{enumerate}
+
+\subsection*{Journal articles (abstract-only assessment)}
+None: Crossref could not be reached, so no journal articles were scanned this week (see Coverage).
+
+\subsection*{Near misses}
+\begin{itemize}[leftmargin=*]
+  \item \href{https://arxiv.org/abs/2610.29757}{Information-Induced Conservatism Frontier of Distributed Stability Certificates} (Peng and Liu): separates the conservatism of distributed stability certificates into an irreducible part caused by what each node reports and a part caused by the method, but the benchmark is the data-informativity idea of van Waarde et al.\ (2020) applied to reporting interfaces, and the abstract does not show what is proved beyond the definitions and three case studies.
+  \item \href{https://arxiv.org/abs/2610.29910}{Worst-Case Finite-Horizon Analysis of Perturbed LQR via Performance Estimation Problem} (Couthures et al.): imports performance estimation from the analysis of optimization algorithms to compute worst-case finite-horizon \ac{LQR} behaviour under norm-bounded perturbations, but the resulting \ac{SDP} is rank-constrained, so the bound is tight only when a rank-one solution is found, and the comparison with \ac{IQC} bounds is numerical.
+  \item \href{https://arxiv.org/abs/2610.29940}{Small-time approximate controllability of bilinear Schr{\"o}dinger equations on compact normal homogeneous spaces} (Parada): uses Peter--Weyl theory to build finite saturating families of control potentials, which substantially enlarges the class of domains with small-time approximate controllability, but stays within the existing saturation-and-transport framework.
+\end{itemize}
+
+\subsection*{Coverage}
+The scan's own sources failed this week. The environment's egress proxy refused connections to the arXiv API (\texttt{export.arxiv.org}), the arXiv listing pages (\texttt{arxiv.org}) and the Crossref API (\texttt{api.crossref.org}) with HTTP 403, and the page-fetch tool could not resolve any host at all (DNS error \texttt{ENOTFOUND}, even for \texttt{example.com}), so no listing page, abstract page or full text was fetched. As a substitute, 69 web searches restricted to arxiv.org (50 for discovery, 19 on specific papers or prior work) surfaced about 50 eess.SY or math.OC submissions dated 19 to 26 October, out of an estimated several hundred in the window; the sample reflects what the search index had crawled and is not random. Fifteen shortlisted preprints were assessed from abstracts and short HTML excerpts returned by the search; none was read in full. No journal articles were scanned: IEEE TAC, Automatica, SICON, IEEE TCNS, MCSS, ESAIM:COCV, SIADS, SIOPT, Mathematical Programming and Mathematics of Operations Research were all skipped because Crossref was unreachable. Most of this window falls outside next week's, so papers missed here will stay missed unless the scan is rerun with working sources.
 
 \nocite{*}
 \bibliographystyle{IEEEtran}
