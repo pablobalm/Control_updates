@@ -1,0 +1,113 @@
+% digest.tex -- cumulative weekly scan for novel control-theory research.
+% Updated automatically every Friday; newest week first. Bibliography: refs.bib.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+
+\usepackage{acronym}
+% The acronym environment typesets a list, so it lives in the document body
+% (straight after \maketitle), not here.
+
+\newcommand{\ts}[1]{{\textnormal{#1}}}
+\newcommand{\diff}[2]{{\frac{d #1}{d #2}}}
+\newcommand{\pdiff}[2]{{\frac{\partial #1}{\partial #2}}}
+\newcommand{\ie}{\emph{i.e.},\ }
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{c.f.}\ }
+\newcommand{\Nset}{\mathbb{N}}
+\newcommand{\Rset}{\mathbb{R}}
+\newcommand{\Cset}{\mathbb{C}}
+\newcommand{\mc}{\mathcal}
+\newcommand{\md}{\mathds}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\ms}{\mathscr}
+\newcommand\st{\colon~}
+\newcommand{\ov}{\overline}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\pgfplotsset{every tick label/.append style={font=\tiny}}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{shapes, fit, decorations.markings, matrix, plotmarks, positioning, spy, patterns, shadows, calc, backgrounds, arrows.meta, arrows}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{circuits.ee.IEC}
+\usetikzlibrary{fit}
+\usetikzlibrary{plotmarks,pgfplots.colorbrewer}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{circuits.ee.IEC}
+\usepackage[americanvoltages,siunitx]{circuitikz}
+
+% Loaded before the theorem definitions: \newtheorem* needs amsthm.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{amsthm}
+
+\newtheorem{theorem} {Theorem}
+\newtheorem{example} {Example}
+\newtheorem{definition} {Definition}
+\newtheorem{assumption} {Assumption}
+\newtheorem{lemma} {Lemma}
+\newtheorem{coro} {Corollary}
+\newtheorem{proposition}{Proposition}
+ \newtheorem*{remark}{Remark}
+
+% subequations
+\newcounter{subeqn} \renewcommand{\thesubeqn}{\theequation\alph{subeqn}}%
+\newcommand{\subeqn}{%
+  \refstepcounter{subeqn}% Step subequation number
+  \tag{\thesubeqn}% Label equation
+}
+
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage[shortlabels]{enumitem}
+\usepackage{bm}
+\usepackage{stfloats}
+\usepackage{dsfont}
+
+\usepackage[colorlinks=true,allcolors=blue!50!black]{hyperref} % clickable links to the papers
+
+\title{Control Theory: Weekly Scan for Novel Work}
+\author{Automated weekly scan}
+\date{Last updated: none yet} % LAST-UPDATED (each weekly run rewrites this line)
+
+\begin{document}
+\maketitle
+
+\section*{Acronyms}
+% Alphabetical. Each weekly run adds any new acronym it uses, never a duplicate.
+\begin{acronym}[MPC]
+  \acro{LMI}{linear matrix inequality}
+  \acro{MPC}{model predictive control}
+  \acro{RL}{reinforcement learning}
+\end{acronym}
+
+\section*{Selection bar}
+A paper is picked only if it clearly does at least one of the following:
+introduces a new problem formulation, framework or system-theoretic concept;
+brings a mathematical tool into control in a way that changes what can be proved or computed;
+proves a fundamental limit, an impossibility result or a tight characterisation, or settles a known open problem;
+removes a standing assumption, or changes scalability or the kind of guarantee qualitatively.
+Excluded: extensions that reuse the same proof technique, less conservative \ac{LMI} conditions,
+known methods (\eg, \ac{MPC} or \ac{RL}) applied to a new plant, and simulation-only claims.
+Judgements are made from abstracts only.
+
+Sources: arXiv (eess.SY and math.OC, including cross-lists) and new articles in IEEE TAC, Automatica, SICON,
+IEEE TCNS, MCSS, ESAIM:COCV and SIADS, plus control-related articles in SIOPT, Mathematical Programming and
+Mathematics of Operations Research.
+
+% ---------------------------------------------------------------------------
+% Weekly entries, newest first. Each run inserts its section directly below
+% the marker line and leaves the marker in place.
+% ---------------------------------------------------------------------------
+%%% NEW-WEEK-INSERTION-POINT %%%
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}
