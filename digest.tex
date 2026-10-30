@@ -74,7 +74,7 @@
 
 \title{Control Theory: Weekly Scan for Novel Work}
 \author{Automated weekly scan}
-\date{Last updated: 27 October 2026} % LAST-UPDATED (each weekly run rewrites this line)
+\date{Last updated: 30 October 2026} % LAST-UPDATED (each weekly run rewrites this line)
 
 \begin{document}
 \maketitle
@@ -82,12 +82,15 @@
 \section*{Acronyms}
 % Alphabetical. Each weekly run adds any new acronym it uses, never a duplicate.
 \begin{acronym}[MPC]
+  \acro{CBF}{control barrier function}
   \acro{HJB}{Hamilton--Jacobi--Bellman}
   \acro{IQC}{integral quadratic constraint}
   \acro{LMI}{linear matrix inequality}
   \acro{LQ}{linear-quadratic}
   \acro{LQR}{linear-quadratic regulator}
+  \acro{LTI}{linear time-invariant}
   \acro{MPC}{model predictive control}
+  \acro{PID}{proportional--integral--derivative}
   \acro{RL}{reinforcement learning}
   \acro{SDP}{semidefinite program}
 \end{acronym}
@@ -111,6 +114,55 @@ Mathematics of Operations Research.
 % the marker line and leaves the marker in place.
 % ---------------------------------------------------------------------------
 %%% NEW-WEEK-INSERTION-POINT %%%
+
+\section{Week ending 30 October 2026}
+\label{week:2026-10-30}
+\paragraph{Judgement.} A good week for mathematical control theory: four preprints clear the bar, each with an exact answer to a sharply posed question, while none of the 50 new journal articles does. The strongest are an if-and-only-if gain region for \ac{PID} regulation of a broad class of uncertain nonlinear plants, resting on a new Markus--Yamabe-type theorem, and an explicit length minimiser in a Carnot group that is not $C^2$, which shows that the known smoothness of geodesics in rank-two Carnot groups cannot be pushed beyond step four. The other two are fundamental limits: certainty-equivalent control can lose linearly in the horizon when actions shape what is observed (continuing last week's dual-control thread), and checking whether a polytope in inequality form is control invariant is coNP-complete.
+
+\subsection*{Preprints (full-text assessment)}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Necessary and Sufficient Criteria for Global PID Regulation of Nonlinear Uncertain System}~\cite{zhao2026necessary} (\href{https://arxiv.org/abs/2610.32703}{arXiv:2610.32703}).\\
+  \emph{Setting:} second-order plants $\dot x_1 = x_2$, $\dot x_2 = f(x_1,x_2,u)$ with $f$ unknown and $C^1$, known only through the one-sided bounds $\partial f/\partial x_1 \le L_1$, $\partial f/\partial x_2 \le L_2$ and $\partial f/\partial u \ge 1$ (no growth or global Lipschitz condition); one \ac{PID} controller with fixed gains must regulate every plant in this class to any constant set-point from any initial state.\\
+  \emph{Main result:} a gain triple works for the whole class if and only if it regulates the single extremal linear plant $f = L_1x_1 + L_2x_2 + u$, \ie if and only if $k_i > 0$, $k_p > L_1$ and $(k_p - L_1)(k_d - L_2) > k_i$; the same region is exact for multi-input plants that are affine in the input, with symmetric Jacobians bounded by $L_1 I$ and $L_2 I$ and input matrix $B = B^\top \succeq I$, whereas without the symmetry no fixed diagonal gains regulate the class; inside the region global exponential stability can fail (the example $f = -x_1^3$).\\
+  \emph{Technique:} necessity follows from the extremal linear plant and the Routh--Hurwitz test; sufficiency rests on a new structured Markus--Yamabe theorem for the third-order closed-loop chain, proved with a planar storage function obtained from a viscosity solution of a Hamilton--Jacobi equation, a quadratic correction, mollification and LaSalle's invariance principle.\\
+  \emph{What is new:} earlier work of Zhao and Guo (2017, 2022) gave only sufficient gain sets for non-affine plants, and the exact region only for a subclass affine in the velocity; since the Markus--Yamabe property fails in dimension three in general, closing the gap required a structured version of it, which is the paper's main new tool.\\
+  \emph{Limitations:} second-order plants, constant set-points and exactly known derivative bounds; the multi-input result needs symmetric Jacobians; sampling, delays and input saturation are not treated; the paper is purely analytical, with no simulations.\\
+  \emph{Verdict:} a tight characterisation for an infinite-dimensional uncertainty class that reduces to a single linear test, obtained with a genuinely new tool; confidence high (full text).
+  \item \textbf{Carnot geodesics with H{\"o}lder controls}~\cite{cavallucci2026carnot} (\href{https://arxiv.org/abs/2610.38481}{arXiv:2610.38481}).\\
+  \emph{Setting:} length minimisers among horizontal curves for a rank-two sub-Riemannian structure on $\Rset^4$ with orthonormal frame $X = \partial_x$, $Y = \partial_y + x\,\partial_z + P^2\,\partial_w$, $P = z - \tfrac{2}{5}xy$; the generated Lie algebra is stratified of step five, so the structure lifts, with the same controls and norms, to a rank-two Carnot group of step five.\\
+  \emph{Main result:} an explicit curve through the origin, with controls $(\tfrac{3}{2}|t|^{1/2}, 1)$, minimises length for $|t| \le 10^{-8}$; its arc-length parametrisation is $C^{1,1/2}$ and not $C^{1,\alpha}$ for any $\alpha > 1/2$, so it is not $C^2$, and this transfers to the Carnot group; a family announced for a companion paper gives rank-two Carnot groups of step at most $2n+5$ with minimisers that are only $C^{1,1/(2(n+1))}$.\\
+  \emph{Technique:} minimality is proved by an approximate calibration built separately for each competitor that is no longer than the curve: from the maximum $\mu$ of $|P|$ along the competitor a $C^1$ potential is built whose increment is at least $L(\gamma) - 5000\mu$ and at most $L(\eta) - (10^8/768)\mu$, a contradiction; the Carnot lift uses Palais's integrability theorem.\\
+  \emph{What is new:} smoothness of minimisers was known for rank-two Carnot groups of step at most four, and earlier non-smooth examples include a $C^2$ but not $C^3$ minimiser with a boundary singularity (Chitour et al., 2025); here regularity is lost in the interior of the curve, already at the level of second derivatives and in a Carnot group, so the step-four threshold is sharp, and the loss is invisible to blow-ups.\\
+  \emph{Limitations:} one explicit example on a very short interval; the general family and its Carnot lift are deferred to a companion article; whether the minimiser is normal or abnormal is not stated; how it relates to interior singularities found earlier in other real-analytic structures could not be checked in detail; the central open question, $C^1$ regularity of all minimisers, is untouched.\\
+  \emph{Verdict:} an impossibility result for the regularity problem of sub-Riemannian geodesics, \ie of length-optimal controls, that is sharp in the step; confidence medium (full text; the general family is only announced).
+  \item \textbf{Performance Gaps Between Open-Loop, Certainty-Equivalent, and Optimal Control Under Action-Dependent Observations}~\cite{maynardzhang2026performance} (\href{https://arxiv.org/abs/2610.33412}{arXiv:2610.33412}).\\
+  \emph{Setting:} a scalar linear-Gaussian plant $x_{t+1} = Ax_t + Bu_t + w_t$, open-loop stable ($|A| < 1$), with bilinear measurements $y_t = u_t C x_t + z_t$, so the input sets the measurement gain, and a quadratic cost over horizon $T$; three policies are compared: the optimal one, certainty equivalence (full-information gains applied to the Kalman estimate) and the best open-loop policy.\\
+  \emph{Main result:} an information-strength parameter $q$, a signal-to-noise ratio of the measurements under the certainty-equivalent gain, has thresholds $q_1 < q_2 < q_3$: for $q < q_1$ no policy beats open-loop control by more than $O(1)$; for $q \in (q_2, q_3)$ the optimal policy beats open-loop control by $\Omega(T)$ while certainty equivalence stays within $O(1)$ of it, so certainty equivalence is suboptimal by a margin linear in the horizon; above a fourth threshold $q_4$ certainty equivalence itself gains $\Omega(T)$ over open-loop control.\\
+  \emph{Technique:} the regret against the open-loop benchmark is written as a sum over time of an information credit (the reduction of next-step estimation variance) minus a penalty for deviating from the certainty-equivalent input; the $O(1)$ bounds follow by telescoping, the certainty-equivalent bounds from moment estimates of a multiplicative estimate process, and the optimal policy, which is never computed, is bounded from below by an explicit intermittent probing policy.\\
+  \emph{What is new:} Sattar et al.\ (2025) showed that the separation principle fails for quadratic control with bilinear observations, but not how the loss scales with the horizon; this paper gives the first such scaling regimes, a quantitative form of the dual effect of Bar-Shalom and Tse (1974).\\
+  \emph{Limitations:} scalar, open-loop stable plants only; certainty equivalence is not characterised for $q$ between $q_3$ and $q_4$; the optimal policy is only bounded, not characterised; no vector or unstable case.\\
+  \emph{Verdict:} a fundamental limit of certainty-equivalent control when actions shape the information, with an explicit regime where its loss grows linearly in time; confidence medium (full text; scalar setting).
+  \item \textbf{Verifying Control Invariance of H-Polytopes is coNP-Complete}~\cite{villanueva2026verifying} (\href{https://arxiv.org/abs/2610.36773}{arXiv:2610.36773}).\\
+  \emph{Setting:} discrete-time linear systems $x^+ = Ax + Bu$ with a polytopic input set, given by inequalities or by vertices, and a candidate polytope given by inequalities; rational data, with the state and input dimensions part of the input.\\
+  \emph{Main result:} deciding whether the polytope is control invariant is coNP-complete, and stays hard for controllable pairs, full-dimensional polytopes and $m \le n$; consequently, computing the maximal control invariant subset of a polytope in inequality form is coNP-hard under polynomial-time Turing reductions.\\
+  \emph{Technique:} a short reduction from deciding whether a cube lies in the convex hull of given points (coNP-complete; Freund and Orlin, 1985), via a nilpotent two-block system whose input set is a simplex; membership in coNP via a vertex of the polytope plus a Farkas certificate.\\
+  \emph{What is new:} for polytopes given by their vertices, control invariance can be checked in polynomial time by linear programming (Gutman and Cwikel, 1986); for the inequality form used in most \ac{MPC} terminal-set computations no complexity classification was available.\\
+  \emph{Limitations:} a short note whose reduction leans on known polytope-containment hardness; deterministic discrete-time systems only; robust invariance, continuous time and fixed dimension are not treated; no experiments.\\
+  \emph{Verdict:} an impossibility (complexity) result that explains why exact control-invariant-set computations in inequality form scale badly; confidence medium (full text; its weight comes from settling a basic question rather than from new technique).
+\end{enumerate}
+
+\subsection*{Journal articles (abstract-only assessment)}
+No paper cleared the bar this week.
+
+\subsection*{Near misses}
+\begin{itemize}[leftmargin=*]
+  \item \href{https://arxiv.org/abs/2610.40473}{Fundamental Limits of Sampling-Based Reachability: Geometry and Flow Distortion} (Liu et al.): sample-complexity upper bounds and a minimax lower bound, matching up to a factor of order $4^n$ and logarithms, for estimating reachable sets from simulated end points; but the minimax limit itself appeared in the authors' July 2026 conference version (arXiv:2607.18606), and the new parts (a one-sided Lipschitz constant, so that contracting flows need fewer samples, initial sets with corners, and matching dependence on the horizon) sharpen that result rather than add a new one.
+  \item \href{https://arxiv.org/abs/2610.38417}{Using delays for prescribed-time static output feedback stabilization of LTI controllable and observable systems} (Zhang and Fridman): an explicit delayed static output feedback that brings every controllable and observable \ac{LTI} system exactly to zero at a prescribed time; but it assembles known tools (act-and-wait, reconstruction of the state from delayed outputs, Gramian-based steering), the delays act as controller memory, and robustness to noise and model error is not analysed.
+  \item \href{https://arxiv.org/abs/2610.38108}{Safety of layered control systems via control barrier morphisms} (Ames et al.): a category-theoretic form of \acp{CBF} in which layered systems compose as pullbacks and layer-wise certificates compose into a system-level one; but it follows the authors' categorical Lyapunov theory (2025--2026), and its only application recovers known reduced-order-model safety-filter guarantees.
+\end{itemize}
+
+\subsection*{Coverage}
+arXiv API (eess.SY and math.OC with cross-lists, newest first): the ten pages from start=0 to start=450 were fetched; every page was longer than the fetch tool's 100{,}000-character limit, so each page's tail was fetched separately wherever it could fall in the window. 431 entries have v1 dates in the window (22 October 08:26 to 29 October 17:59 UTC; later submissions were not yet announced and fall in next week's window); the page at start=450 lies wholly before the window, so the remaining URLs were not needed. Three in-window entries already in refs.bib were skipped. Twenty-eight abstracts were read, as close paraphrases (the fetch tool would not quote them verbatim), and 12 preprints were read in full: 11 from the arXiv HTML version and one (arXiv:2610.38108, which has no HTML version) from its PDF, with the text extracted locally. Five HTML texts exceeded the read limit and were read in two parts, the first and the last 100{,}000 characters; this left part of the middle of arXiv:2610.36758 unread, and the appendices of arXiv:2610.36758 and arXiv:2610.33412 were cut off mid-proof, without affecting the main statements. Crossref (items created 22 to 30 October): IEEE TAC 15 research articles (one correction and three front-matter items skipped), Automatica 13, SICON 6, IEEE TCNS 5, MCSS 0, ESAIM:COCV 1, SIADS 5, SIOPT 2, Mathematical Programming 0 and Mathematics of Operations Research 3; of the last three journals only one article, on optimal stopping, has a sequential-decision angle. No response ran past its row limit. Crossref carries no abstracts for TAC, Automatica and TCNS, so the abstracts of nine shortlisted articles were looked up by title; three could not be found and were not assessed (TAC: \emph{On Safety-Constrained Markov Decision Processes} and \emph{Global Asymptotic Stability Preservation Under State and Output Feedback for Nonlinear Systems Subject to Sampled-Delayed Input}; TCNS: \emph{A Unified Framework for Target Controllability of Complex Networks under Input Constraints}). Several of the week's journal articles have arXiv versions dating from 2020 to 2025.
 
 \section{Week ending 27 October 2026}
 \label{week:2026-10-27}
